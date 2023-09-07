@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\CreatePatient;
-use App\Http\Controllers\GetPatient;
+use App\Http\Controllers\GetPatientFromMIS;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,5 +21,5 @@ Route::get('/patients', [CreatePatient::class, 'index'])->name('patients.index')
 
 Route::post('/patients/create', [CreatePatient::class, 'create'])->name('patients.create');
 
-Route::post('/patients/get', [GetPatient::class, 'getPatient'])->name('get');
+Route::post('/patients/get', [GetPatientFromMIS::class, 'getPatient'])->name('get');
 

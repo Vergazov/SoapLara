@@ -6,18 +6,21 @@ use App\Http\Controllers\CreatePatient\DoRequest;
 use App\Http\Controllers\CreatePatient\Patient;
 use App\Http\Controllers\CreatePatient\RequestBody;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PatientRequest;
 use App\Models\Patients;
 use Illuminate\Http\Request;
 use function Psy\debug;
 
 class CreatePatient extends Controller
 {
-    public function index()
+    public function index(Request $req)
     {
-        return view('patients.index');
+        $oldData = $req->old('sex');
+        return view('patients.index',compact('oldData'));
+
     }
 
-    public function create(Request $request): void
+    public function create(PatientRequest $request): void
     {
         $patient = new Patient
         (

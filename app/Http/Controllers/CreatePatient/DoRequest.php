@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 
 class DoRequest extends Controller
 {
-    public static function doRequest($url,$requestBody,$headers){
+    public static function doRequest($url,$requestBody,$headers): bool|string
+    {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL,$url);
         curl_setopt($ch, CURLOPT_POST, true);

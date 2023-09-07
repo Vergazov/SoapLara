@@ -16,43 +16,56 @@
 <body>
     <div class="container w-50">
         <h3>Добавление пациента в ИЭМК</h3>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <form action="{{route('patients.create')}}" class="row g-3 needs-validation" method="POST">
             @csrf
             <div class="col-md-4">
                 <label for="validationCustom01" class="form-label">Имя</label>
-                <input type="text" class="form-control" name="givenName"  id="givenName">
+                <input type="text" class="form-control" name="givenName"  id="givenName" value="{{ old('givenName') }}">
             </div>
             <div class="col-md-4">
                 <label for="validationCustom02" class="form-label">Фамилия</label>
-                <input type="text" class="form-control" name="familyName" id="familyName">
+                <input type="text" class="form-control" name="familyName" id="familyName" value="{{ old('familyName') }}">
             </div>
             <div class="col-md-4">
                 <label for="validationCustomUsername" class="form-label">Дата рождения</label>
                 <div class="input-group has-validation">
-                    <input type="text" class="form-control" name="birthDate" id="birthDate">
+                    <input type="text" class="form-control" name="birthDate" id="birthDate" value="{{ old('birthDate') }}">
                 </div>
             </div>
             <div class="col-md-6">
                 <label for="validationCustom03" class="form-label">ID пациента в МИС Медтайм</label>
-                <input type="text" class="form-control" name="IdPatientMIS" id="IdPatientMIS">
+                <input type="text" class="form-control" name="IdPatientMIS" id="IdPatientMIS" value="{{ old('IdPatientMIS') }}">
             </div>
             <div class="col-md-3">
                 <label for="validationCustom04" class="form-label">Найти пациента по ID</label>
                 <button class="btn btn-primary searchById" type="button" id="validationCustom04">Найти пациента</button>
             </div>
             <div class="col-md-3">
-                <label for="validationCustom05" class="form-label">Пол</label>
+                <label for="sex" class="form-label">Пол</label>
                 <select class="form-select" name="sex" id="sex">
                     <option selected value="1">Мужской</option>
                     <option value="2">Женский</option>
                 </select>
             </div>
             <div class="col-12">
-                <button class="btn btn-primary" type="submit">Добавить пациента</button>
+                <button class="btn btn-primary createPatient" type="submit">Добавить пациента</button>
             </div>
         </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <!--TODO
+    сделать смену селекта при непрохождении валидации
+    !-->
     <script>
         $(document).ready(function (){
             $.ajaxSetup({
@@ -73,15 +86,13 @@
                         $('#familyName').attr("value",responce[0]['familyName'])
                         $('#birthDate').attr("value",responce[0]['birthDate'])
                         $('#IdPatientMIS').attr("value",responce[0]['IdPatientMIS'])
-                        $('#validationCustom05').prop("value",responce[0]['sex'])
+                        $('#sex').prop("value",responce[0]['sex'])
                     },
                     error: function(error){
                        console.log(error)
                     }
                 });
-
-
-            })
+            });
         })
     </script>
 </body>
