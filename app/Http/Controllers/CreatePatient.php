@@ -20,7 +20,7 @@ class CreatePatient extends Controller
 
     }
 
-    public function create(PatientRequest $request): void
+    public function create(PatientRequest $request)
     {
         $patient = new Patient
         (
@@ -43,19 +43,14 @@ class CreatePatient extends Controller
 
         $response = DoRequest::doRequest(LPU::getPixService(), $requestBody, Headers::getHeaders());
 
-        #TODO
-        # сделать переадресацию с выводом сообщения об успехе/ошибке
-
         $parser = xml_parser_create();
         xml_parse_into_struct($parser, $response, $vals, $index);
         xml_parser_free($parser);
 
         if(isset($index['S:FAULT'])){
-            dump($vals[19]['tag']);
-            dump($vals[19]['value']);
-        }else{
-            echo 'Данные успешно отправлены';
+            return $vals[19]['tag'] . ' ' .  $vals[19]['value'] . ' ' . $vals[17]['value'];
         }
+        return TRUE;
 
     }
 

@@ -22,24 +22,24 @@ class PatientRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'givenName' => ['required', 'string'],
-            'familyName' => ['required', 'string'],
-            'birthDate' => ['required','date'],
+            'givenName'    => ['required', 'string'],
+            'familyName'   => ['required', 'string'],
+            'birthDate'    => ['required', 'date'],
             'IdPatientMIS' => ['required', 'integer'],
-            'sex' => ['required', 'integer'],
+            'sex'          => ['required', 'integer'],
         ];
     }
 
     public function messages()
     {
-        return[
-            'givenName.required' => 'Поле "Имя" должно быть заполнено',
-            'familyName.required' => 'Поле "Фамилия" должно быть заполнено',
-            'birthDate.required' => 'Поле "Дата рождения" должно быть заполнено',
-            'birthDate.date' => 'Введите корректную дату рождения',
+        return [
+            'givenName.required'    => 'Поле "Имя" должно быть заполнено',
+            'familyName.required'   => 'Поле "Фамилия" должно быть заполнено',
+            'birthDate.required'    => 'Поле "Дата рождения" должно быть заполнено',
+            'birthDate.date'        => 'Введите корректную дату рождения',
             'IdPatientMIS.required' => 'Поле "ID пациента в МИС Медтайм" должно быть заполнено',
-            'IdPatientMIS.integer' => 'Поле "ID пациента в МИС Медтайм" должно быть в формате числа',
-            'sex.required' => 'Поле "Пол" должно быть заполнено',
+            'IdPatientMIS.integer'  => 'Поле "ID пациента в МИС Медтайм" должно быть в формате числа',
+            'sex.required'          => 'Поле "Пол" должно быть заполнено',
         ];
     }
 }

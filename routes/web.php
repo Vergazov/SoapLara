@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-
 Route::get('/patients', [CreatePatient::class, 'index'])->name('patients.index');
 
 Route::post('/patients/create', [CreatePatient::class, 'create'])->name('patients.create');

@@ -10,7 +10,8 @@ class GetPatientFromMIS extends Controller
 {
     public function getPatient(Request $request)
     {
-        $IdPatientMIS =  $request->all();
+        $IdPatientMIS = $request->all();
+
         return Patients::where('IdPatientMIS', $IdPatientMIS)->get();
     }
 }
