@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class Headers extends Controller
+class HeadersController extends Controller
 {
     public static function getHeaders(): array
     {

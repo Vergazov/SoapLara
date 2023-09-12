@@ -5,7 +5,7 @@ namespace App\Http\Controllers\CreatePatient;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class Patient extends Controller
+class PatientController extends Controller
 {
     private string $birthDate;
     private string $familyName;

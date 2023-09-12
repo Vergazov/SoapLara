@@ -2,27 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\CreatePatient\DoRequest;
-use App\Http\Controllers\CreatePatient\Patient;
-use App\Http\Controllers\CreatePatient\RequestBody;
+use App\Http\Controllers\CreatePatient\RequestController;
+use App\Http\Controllers\CreatePatient\PatientController;
+use App\Http\Controllers\CreatePatient\RequestBodyController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PatientRequest;
 use App\Models\Patients;
 use Illuminate\Http\Request;
 use function Psy\debug;
 
-class CreatePatient extends Controller
+class CreatePatientController extends Controller
 {
-    public function index(Request $req)
+    public function index()
     {
-        $oldData = $req->old('sex');
-        return view('patients.index',compact('oldData'));
-
+        return view('patients.index');
     }
 
     public function create(PatientRequest $request)
     {
-        $patient = new Patient
+        $patient = new PatientController
         (
             $request->input('birthDate'),
             $request->input('familyName'),
@@ -30,10 +28,10 @@ class CreatePatient extends Controller
             $request->input('IdPatientMIS'),
             $request->input('sex'));
 
-        $requestBody = RequestBody::getRequestBody
+        $requestBody = RequestBodyController::getRequestBody
         (
-            LPU::getGuId(),
-            LPU::getIdLPU(),
+            LPUController::getGuId(),
+            LPUController::getIdLPU(),
             $patient->getBirthDate(),
             $patient->getFamilyName(),
             $patient->getGivenName(),
@@ -41,8 +39,9 @@ class CreatePatient extends Controller
             $patient->getSex()
         );
 
-        $response = DoRequest::doRequest(LPU::getPixService(), $requestBody, Headers::getHeaders());
+        $response = RequestController::doRequest(LPUController::getPixService(), $requestBody, HeadersController::getHeaders());
 
+        // Преобразуем xml-ответ в массив для дальнейшей обработки
         $parser = xml_parser_create();
         xml_parse_into_struct($parser, $response, $vals, $index);
         xml_parser_free($parser);
@@ -51,7 +50,6 @@ class CreatePatient extends Controller
             return $vals[19]['tag'] . ' ' .  $vals[19]['value'] . ' ' . $vals[17]['value'];
         }
         return TRUE;
-
     }
 
 }

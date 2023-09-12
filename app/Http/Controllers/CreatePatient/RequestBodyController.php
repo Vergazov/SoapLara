@@ -5,7 +5,7 @@ namespace App\Http\Controllers\CreatePatient;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class RequestBody extends Controller
+class RequestBodyController extends Controller
 {
     public static function getRequestBody($guid, $idLPU, $birthDate, $familyName, $givenName, $idPatientMis, $sex): string
     {

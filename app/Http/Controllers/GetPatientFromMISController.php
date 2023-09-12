@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Patients;
 use Illuminate\Http\Request;
 
-class GetPatientFromMIS extends Controller
+class GetPatientFromMISController extends Controller
 {
     public function getPatient(Request $request)
     {

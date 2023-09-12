@@ -5,7 +5,7 @@ namespace App\Http\Controllers\CreatePatient;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class DoRequest extends Controller
+class RequestController extends Controller
 {
     public static function doRequest($url,$requestBody,$headers): bool|string
     {

@@ -82,7 +82,7 @@
             var IdPatientMIS = $('#IdPatientMIS').val()
 
             $.ajax({
-                url: '{{route("get")}}',
+                url: '{{route("patients.get")}}',
                 method: 'POST',
                 data: {IdPatientMIS},
                 success: function (responce) {
