@@ -16,7 +16,7 @@
 </head>
 <body>
 <div class="container w-50">
-    <h3>Добавление пациента в ИЭМК</h3>
+    <h3>Добавление пациента в ИЭМК1</h3>
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
